@@ -9,6 +9,7 @@ import java.util.List;
  * Created by Brady on 2017/7/7.
  */
 public interface OrderMapper {
+
     List<Order> getAllOrders();
 
     Order getOrderById(long uid);
