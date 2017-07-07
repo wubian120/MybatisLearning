@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="mybatis.pojo.User">
+
+        <id     column="id"   property="id"   jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age"  property="age"  jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--<select id="getAll" resultMap="UserResultMap">-->
+        <!--SELECT * FROM public.user-->
+    <!--</select>-->
+    <select id="getUserById" parameterType="String" resultMap="UserResultMap">
+        SELECT * FROM public.user WHERE id = #{vaule}
+    </select>
+
+    <!--测试resultType用法-->
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM public.user
+    </select>
+
+    <!--插入 parameterType -->
+    <insert id="insertUserById" parameterType="mybatis.pojo.User">
+        INSERT INTO public.user(id, name, age) VALUES (#{id},#{name},#{age})
+    </insert>
+
+    <!--删除 通过id-->
+    <delete id="deleteUserById" parameterType="mybatis.pojo.User">
+        DELETE FROM public.user WHERE id=#{id}
+    </delete>
+
+    <update id="updateUserById" parameterType="mybatis.pojo.User">
+        UPDATE public.user SET name=#{name}, age=#{age}  WHERE id=#{id}
+    </update>
+
+</mapper>

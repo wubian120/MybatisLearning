@@ -1,4 +1,4 @@
-package cn.brady.dao;
+package mybatis.pojo;
 
 
 

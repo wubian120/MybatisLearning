@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.brady.dao.OrderDetailMapper">
+    <resultMap id="OrderDetailResultMap" type="cn.brady.pojo.OrderDetail">
+        <id column="detail_id" property="detailId" jdbcType="BIGINT" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
+        <result column="item_id" property="itemId" jdbcType="BIGINT" />
+        <result column="item_num" property="num" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="getAllDetail" resultMap="OrderDetailResultMap">
+        SELECT * FROM order_detail
+    </select>
+
+    <select id="getOrderDetailById" parameterType="Long" resultMap="OrderDetailResultMap">
+        SELECT * FROM order_detail WHERE detail_id = #{VALUE}
+    </select>
+
+</mapper>

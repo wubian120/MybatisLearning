@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.brady.dao.UserMapper">
+
+    <resultMap id="UserResultMap" type="cn.brady.pojo.User">
+
+        <id     column="id"   property="id"   jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age"  property="age"  jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="UserResultMap">
+        SELECT * FROM public.user
+    </select>
+
+    <select id="getUserById" parameterType="String" resultMap="UserResultMap">
+        SELECT * FROM public.user WHERE id = #{VALUE}
+    </select>
+
+
+
+</mapper>
