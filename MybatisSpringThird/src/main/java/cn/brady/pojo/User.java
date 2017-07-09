@@ -1,12 +1,13 @@
 package cn.brady.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Brady on 2017/7/6.
  */
-public class User {
+public class User implements Serializable{
 
     private long uid;
     private String name;

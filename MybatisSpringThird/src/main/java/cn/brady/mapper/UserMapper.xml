@@ -8,12 +8,21 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
 
         <collection property="orders" ofType="cn.brady.pojo.Order">
-            <id property="oid" column="oid"/>
-            <result property="uid" column="uid"/>
-            <result property="note" column="note"/>
-            <result property="createTime" column="create_time" jdbcType="DATE"/>
+            <id column="oid" property="oid" jdbcType="BIGINT" />
+            <result column="uid" property="uid" jdbcType="BIGINT" />
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="note" property="note" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
+    <!--<resultMap id="OrdersByUserId" type="cn.brady.pojo.User" extends="UserResultMap">-->
+        <!--<collection property="orders" ofType="cn.brady.pojo.Order">-->
+            <!--<id column="oid" property="oid" jdbcType="BIGINT" />-->
+            <!--<result column="uid" property="uid" jdbcType="BIGINT" />-->
+            <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />-->
+            <!--<result column="note" property="note" jdbcType="VARCHAR" />-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+
 
 
 
@@ -28,7 +37,7 @@
     </select>
 
     <select id="getOrdersByUserId" parameterType="long" resultType="cn.brady.pojo.Order">
-        SELECT * FROM `order` WHERE `order`.uid = #{VALUE}
+        SELECT * FROM `order`  WHERE `order`.uid = #{VALUE}
     </select>
 
 </mapper>

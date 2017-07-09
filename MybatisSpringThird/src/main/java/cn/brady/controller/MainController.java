@@ -75,14 +75,22 @@ public class MainController {
 
         System.out.println("Using OrderMapper to get user...");
         for(Order order : orders){
-            System.out.println(order.getUid()+" "+ order.getUser().getName()+" time: "+order.getCreateTime()+ " ");
+            System.out.println(order.getUid()+" "+ order.getUser().getName()+" time: "+order.getCreateTime()+ " user time: "+order.getUser().getCreateTime() );
         }
 
-        System.out.println("..........");
-        List<Order> orderList = userMapper.getOrdersByUserId(3);
+        System.out.println(".....一对多.....");
+        List<Order> orderList= userMapper.getOrdersByUserId(3);
         for(Order order : orderList){
             System.out.println("oid:"+ order.getOid()+" note: " + order.getNote()+" create time: "+ order.getCreateTime());
         }
+
+        System.out.println("..OrderDetail...一对多.....");
+        List<OrderDetail> details = orderMapper.getOrderDetailsByOrderId(2);
+        for(OrderDetail od : details){
+            System.out.println("od order_id: " + od.getOrderId()+" od num: "+ od.getNum());
+        }
+
+
 
         return "Hello World...";
     }

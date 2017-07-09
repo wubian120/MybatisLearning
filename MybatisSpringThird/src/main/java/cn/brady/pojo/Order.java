@@ -1,11 +1,13 @@
 package cn.brady.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Brady on 2017/7/6.
  */
-public class Order {
+public class Order implements Serializable {
 
     private long oid;
     private long uid;
@@ -13,6 +15,7 @@ public class Order {
     private String note;
 
     private User user;
+    private List<OrderDetail> orderDetails;
 
     public long getOid() {return oid;}
     public void setOid(long oid) {this.oid = oid;}
@@ -31,5 +34,7 @@ public class Order {
     }
 
 
-
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
 }

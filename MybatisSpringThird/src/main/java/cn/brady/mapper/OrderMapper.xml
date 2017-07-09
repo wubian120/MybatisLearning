@@ -14,6 +14,12 @@
             <result column="create_time" property="createTime"/>
             <result column="password" property="password"/>
         </association>
+        <collection property="orderDetails" ofType="cn.brady.pojo.OrderDetail">
+            <id column="detail_id" property="detailId" jdbcType="BIGINT" />
+            <result column="order_id" property="orderId" jdbcType="BIGINT" />
+            <result column="item_id" property="itemId" jdbcType="BIGINT" />
+            <result column="item_num" property="num" jdbcType="INTEGER" />
+        </collection>
     </resultMap>
 
     <select id="getAllOrders" resultMap="OrderResultMap">
@@ -27,6 +33,10 @@
     <select id="findOrderUserResultMap" resultMap="OrderResultMap">
         SELECT `order`.*, user.name, user.create_time, user.password
         FROM `order`, user WHERE `order`.uid = user.uid
+    </select>
+
+    <select id="getOrderDetailsByOrderId" parameterType="long" resultType="cn.brady.pojo.OrderDetail">
+        SELECT * FROM order_detail WHERE order_detail.order_id = #{VALUE}
     </select>
 
 </mapper>

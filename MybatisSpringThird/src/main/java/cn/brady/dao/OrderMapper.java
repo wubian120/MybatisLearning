@@ -1,6 +1,7 @@
 package cn.brady.dao;
 
 import cn.brady.pojo.Order;
+import cn.brady.pojo.OrderDetail;
 import cn.brady.pojo.User;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface OrderMapper {
     Order getOrderById(long uid);
 
     List<Order> findOrderUserResultMap() throws Exception;
+
+    List<OrderDetail> getOrderDetailsByOrderId(long id) throws Exception;
 
 }
