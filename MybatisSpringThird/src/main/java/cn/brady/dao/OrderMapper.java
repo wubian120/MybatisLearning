@@ -13,4 +13,7 @@ public interface OrderMapper {
     List<Order> getAllOrders();
 
     Order getOrderById(long uid);
+
+    List<Order> findOrderUserResultMap() throws Exception;
+
 }

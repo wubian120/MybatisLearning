@@ -5,10 +5,11 @@ package cn.brady.controller;
  */
 
 
-import cn.brady.dao.ItemMapper;
-import cn.brady.dao.OrderDetailMapper;
-import cn.brady.dao.UserMapper;
+import cn.brady.dao.*;
+
+import cn.brady.pojo.Order;
 import cn.brady.pojo.OrderDetail;
+import cn.brady.pojo.OrdersCustom;
 import cn.brady.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,12 @@ public class MainController {
     @Autowired
     private OrderDetailMapper odMapper;
 
+    @Autowired
+    private OrdersCustomMapper ocMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
+
 
 
 
@@ -38,7 +45,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String getUsers(){
+    public String getUsers()throws Exception{
 
 //        List<User> users = userService.getAll();
 
@@ -54,6 +61,28 @@ public class MainController {
         List<OrderDetail> ods = odMapper.getAllDetail();
 
         System.out.println(ods.size());
+
+
+
+        List<OrdersCustom> ocs = ocMapper.findOrdersUser();
+
+        for(OrdersCustom oc : ocs){
+            System.out.println(oc.getName()+ oc.getCreateTime()+ " order time"
+            + oc.getCreateTime() +" order note " + oc.getNote());
+        }
+
+        List<Order> orders = orderMapper.findOrderUserResultMap();
+
+        System.out.println("Using OrderMapper to get user...");
+        for(Order order : orders){
+            System.out.println(order.getUid()+" "+ order.getUser().getName()+" time: "+order.getCreateTime()+ " ");
+        }
+
+        System.out.println("..........");
+        List<Order> orderList = userMapper.getOrdersByUserId(3);
+        for(Order order : orderList){
+            System.out.println("oid:"+ order.getOid()+" note: " + order.getNote()+" create time: "+ order.getCreateTime());
+        }
 
         return "Hello World...";
     }

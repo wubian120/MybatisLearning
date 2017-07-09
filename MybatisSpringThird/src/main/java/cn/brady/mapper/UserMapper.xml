@@ -6,7 +6,18 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="DATE" />
         <result column="password" property="password" jdbcType="VARCHAR" />
+
+        <collection property="orders" ofType="cn.brady.pojo.Order">
+            <id property="oid" column="oid"/>
+            <result property="uid" column="uid"/>
+            <result property="note" column="note"/>
+            <result property="createTime" column="create_time" jdbcType="DATE"/>
+        </collection>
     </resultMap>
+
+
+
+
 
     <select id="getAllUsers" resultMap="UserResultMap">
         SELECT * FROM user
@@ -14,6 +25,10 @@
 
     <select id="getUserById" parameterType="Long" resultMap="UserResultMap">
         SELECT * FROM user WHERE uid = #{VALUE}
+    </select>
+
+    <select id="getOrdersByUserId" parameterType="long" resultType="cn.brady.pojo.Order">
+        SELECT * FROM `order` WHERE `order`.uid = #{VALUE}
     </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package cn.brady.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Brady on 2017/7/6.
@@ -12,10 +13,11 @@ public class User {
     private Date createTime;
     private String password;
 
+    private List<Order> orders;
+
     public long getUid() {
         return uid;
     }
-
     public void setUid(long uid) {
         this.uid = uid;
     }
@@ -23,7 +25,6 @@ public class User {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -31,7 +32,6 @@ public class User {
     public Date getCreateTime() {
         return createTime;
     }
-
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
@@ -39,10 +39,10 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-
+    public List<Order> getOrders() {return orders;}
+    public void setOrders(List<Order> orders) {this.orders = orders;}
 }

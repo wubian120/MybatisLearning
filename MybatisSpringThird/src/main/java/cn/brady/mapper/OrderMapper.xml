@@ -6,6 +6,14 @@
         <result column="uid" property="uid" jdbcType="BIGINT" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="note" property="note" jdbcType="VARCHAR" />
+
+        <!--association 1对1 查询 将uid与User对象关联起来-->
+        <association property="user" javaType="cn.brady.pojo.User">
+            <id column="uid" property="uid"/>
+            <result column="name" property="name"/>
+            <result column="create_time" property="createTime"/>
+            <result column="password" property="password"/>
+        </association>
     </resultMap>
 
     <select id="getAllOrders" resultMap="OrderResultMap">
@@ -14,6 +22,11 @@
 
     <select id="getOrderById" parameterType="Long" resultMap="OrderResultMap">
         SELECT * FROM order WHERE oid = #{VALUE}
+    </select>
+
+    <select id="findOrderUserResultMap" resultMap="OrderResultMap">
+        SELECT `order`.*, user.name, user.create_time, user.password
+        FROM `order`, user WHERE `order`.uid = user.uid
     </select>
 
 </mapper>

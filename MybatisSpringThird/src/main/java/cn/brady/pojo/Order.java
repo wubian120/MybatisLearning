@@ -12,6 +12,8 @@ public class Order {
     private Date createTime;
     private String note;
 
+    private User user;
+
     public long getOid() {return oid;}
     public void setOid(long oid) {this.oid = oid;}
 
@@ -23,4 +25,11 @@ public class Order {
 
     public String getNote() {return note;}
     public void setNote(String note) {this.note = note;}
+
+    public User getUser() {
+        return user;
+    }
+
+
+
 }
