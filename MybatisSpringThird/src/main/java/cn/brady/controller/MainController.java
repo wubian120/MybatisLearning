@@ -79,9 +79,10 @@ public class MainController {
         }
 
         System.out.println(".....一对多.....");
-        List<Order> orderList= userMapper.getOrdersByUserId(3);
-        for(Order order : orderList){
-            System.out.println("oid:"+ order.getOid()+" note: " + order.getNote()+" create time: "+ order.getCreateTime());
+        User user= userMapper.getOrdersByUserId(3);
+
+        for(Order order : user.getOrders()){
+            System.out.println(order.getCreateTime() + " note " + order.getNote());
         }
 
         System.out.println("..OrderDetail...一对多.....");
@@ -89,6 +90,10 @@ public class MainController {
         for(OrderDetail od : details){
             System.out.println("od order_id: " + od.getOrderId()+" od num: "+ od.getNum());
         }
+
+        System.out.println(".....多对多.....");
+
+
 
 
 

@@ -14,6 +14,8 @@ public interface UserMapper {
 
     User getUserById(long uid);
 
-    List<Order> getOrdersByUserId(long uid);
+    User getOrdersByUserId(long uid);
+
+    User getUserAndItemResultMap();
 
 }

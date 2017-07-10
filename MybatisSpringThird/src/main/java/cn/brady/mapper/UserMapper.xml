@@ -7,13 +7,52 @@
         <result column="create_time" property="createTime" jdbcType="DATE" />
         <result column="password" property="password" jdbcType="VARCHAR" />
 
+
+        <!--一个用户对应多个order-->
         <collection property="orders" ofType="cn.brady.pojo.Order">
             <id column="oid" property="oid" jdbcType="BIGINT" />
             <result column="uid" property="uid" jdbcType="BIGINT" />
             <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
             <result column="note" property="note" jdbcType="VARCHAR" />
         </collection>
+
     </resultMap>
+
+    <resultMap id="UserAndItemResultMap" type="cn.brady.pojo.User">
+        <id column="uid" property="uid" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+
+
+        <!--一个用户对应多个order-->
+        <collection property="orders" ofType="cn.brady.pojo.Order">
+            <id column="oid" property="oid" jdbcType="BIGINT" />
+            <result column="uid" property="uid" jdbcType="BIGINT" />
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="note" property="note" jdbcType="VARCHAR" />
+
+            <!--一个订单 对应多个 订单明细-->
+            <collection property="orderDetails" ofType="cn.brady.pojo.OrderDetail">
+                <id column="detail_id" property="detailId" jdbcType="BIGINT" />
+                <result column="order_id" property="orderId" jdbcType="BIGINT" />
+                <result column="item_id" property="itemId" jdbcType="BIGINT" />
+                <result column="item_num" property="num" jdbcType="INTEGER" />
+                <!--一个订单明细  只有一种商品 -->
+                <association property="item" javaType="cn.brady.pojo.Item">
+                    <id column="item_id" property="uid" jdbcType="BIGINT" />
+                    <result column="name" property="name" jdbcType="VARCHAR" />
+                    <result column="price" property="price" jdbcType="FLOAT"/>
+                    <result column="detail" property="detail" jdbcType="VARCHAR" />
+                    <result column="pic" property="pic" jdbcType="VARCHAR" />
+                    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+                </association>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+
     <!--<resultMap id="OrdersByUserId" type="cn.brady.pojo.User" extends="UserResultMap">-->
         <!--<collection property="orders" ofType="cn.brady.pojo.Order">-->
             <!--<id column="oid" property="oid" jdbcType="BIGINT" />-->
@@ -22,6 +61,12 @@
             <!--<result column="note" property="note" jdbcType="VARCHAR" />-->
         <!--</collection>-->
     <!--</resultMap>-->
+
+    <!-- SQL语句 是可以的 。但是感觉 这样做 没有任何 现实意义-->
+    <select id="getUserAndItemResultMap" resultMap="UserAndItemResultMap">
+        SELECT `order`.*, user.*, order_detail.*, item.* FROM `order`, user, order_detail, item WHERE
+        `order`.uid = user.uid AND order_detail.order_id = `order`.oid AND order_detail.item_id = item.item_id
+    </select>
 
 
 
@@ -36,8 +81,8 @@
         SELECT * FROM user WHERE uid = #{VALUE}
     </select>
 
-    <select id="getOrdersByUserId" parameterType="long" resultType="cn.brady.pojo.Order">
-        SELECT * FROM `order`  WHERE `order`.uid = #{VALUE}
+    <select id="getOrdersByUserId" parameterType="long" resultMap="UserResultMap">
+        SELECT * FROM `order` , user WHERE `order`.uid = #{VALUE}
     </select>
 
 </mapper>

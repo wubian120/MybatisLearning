@@ -9,6 +9,12 @@ public class OrderDetail {
     private long itemId;
     private int num;
 
+    private Item item;
+
+    public Item getItem() {return item;}
+    public void setItem(Item item) {this.item = item;}
+
+
     public void setDetailId(long detailId) {this.detailId = detailId;}
     public long getDetailId() {return detailId;}
 
