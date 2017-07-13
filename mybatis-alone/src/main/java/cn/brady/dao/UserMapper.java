@@ -13,8 +13,9 @@ public interface UserMapper {
         @Result(property = "uid",       column = "uid"),
         @Result(property = "name",      column = "name"),
         @Result(property = "createTime",column = "create_time"),
-        @Result(property = "password",  column = "password")
-        @Result(property = "orders", column = "uid",many = @Many("s"))
+        @Result(property = "password",  column = "password"),
+        @Result(property = "orders",
+                many = @Many(select ="cn.brady.dao.OrderMapper.getOrdersByUserId"))
     })
 
     @Select("Select * from user where uid = #{id}")
@@ -33,6 +34,16 @@ public interface UserMapper {
 
     @Delete("DELETE FROM user WHERE uid=#{uid}")
     int deleteUserById(long id);
+
+
+//    @Select("SELECT `order`.oid, `order`.uid,`order`.create_time, `order`.note FROM `order` WHERE `order`.uid = #{uid}")
+//    @Results({
+//            @Result(property = "oid", column = "oid"),
+//            @Result(property = "uid", column = "uid"),
+//            @Result(property = "createTime", column = "create_time"),
+//            @Result(property = "note", column = "note")
+//    })
+//    List<Order> getOrdersByUserId(long uid);
 
 
 

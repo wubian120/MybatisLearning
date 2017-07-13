@@ -1,5 +1,6 @@
 package cn.brady.dao;
 
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -17,20 +18,19 @@ public interface OrderMapper {
         @Result(property = "uid", column = "uid"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "note", column = "note"),
-        @Result(property = "user",)
+
     })
 
     @Select("SELECT `order`.oid, `order`.uid, `order`.create_time, `order`.note FROM `order`")
     List<Order> getAllOrders();
 
-    @Select("SELECT * FROM `order` WHERE `order`.oid =#{uid} ")
-    Order getOrderById(long uid);
 
-
-
-//    List<OrderDetail> getOrderDetailsByOrderId(long id) throws Exception;
-
-    @Select("SELECT `order`.* WHERE `order`.uid=#{uid}")
+    @Select("SELECT `order`.oid, `order`.uid,`order`.create_time, `order`.note FROM `order` WHERE `order`.uid = #{uid}")
+    @Results(id="orderResults")
     List<Order> getOrdersByUserId(long uid);
+
+
+
+
 
 }

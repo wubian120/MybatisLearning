@@ -14,9 +14,9 @@ public class Order implements Serializable {
     private Date createTime;
     private String note;
 
-    private User user;
 
-    private List<OrderDetail> orderDetails;
+
+
 
     public long getOid() {return oid;}
     public void setOid(long oid) {this.oid = oid;}
@@ -30,12 +30,7 @@ public class Order implements Serializable {
     public String getNote() {return note;}
     public void setNote(String note) {this.note = note;}
 
-    public User getUser() {
-        return user;
-    }
 
 
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
+
 }

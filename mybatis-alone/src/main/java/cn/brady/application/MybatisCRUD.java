@@ -1,5 +1,7 @@
 package cn.brady.application;
 
+import cn.brady.dao.Order;
+import cn.brady.dao.OrderMapper;
 import cn.brady.dao.User;
 import cn.brady.dao.UserMapper;
 import cn.brady.util.DBUtil;
@@ -111,8 +113,23 @@ public class MybatisCRUD {
         upUser.setName("upUser");
         upUser.setPassword("111111");
 
-        long deleteId = 3;
-        deleteUserById(deleteId);
+//        long deleteId = 3;
+//        deleteUserById(deleteId);
+
+        DBUtil.openSession(MybatisCRUD.CONFIG);
+        UserMapper mapper = DBUtil.getMapper(UserMapper.class);
+        OrderMapper orderMapper = DBUtil.getMapper(OrderMapper.class);
+
+        List<Order> orders =  orderMapper.getOrdersByUserId(6);
+
+        for(Order o : orders){
+
+            System.out.println("order id: "+o.getOid());
+            System.out.println("uid id: "+o.getUid());
+            System.out.println(" note : "+o.getNote());
+
+        }
+
 
 
 
