@@ -70,3 +70,4 @@ CREATE TABLE `user` (
   `password` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
