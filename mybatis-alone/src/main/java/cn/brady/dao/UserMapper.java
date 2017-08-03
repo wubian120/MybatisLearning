@@ -24,7 +24,7 @@ public interface UserMapper {
     @Select("Select * from user")
     List<User> getAll();
 
-    @Insert("insert into user(uid, name, create_time, password) values(#{uid},#{name},#{createTime},#{password})")
+    @Insert({"insert into user(uid, name, create_time, password，mobile, updated_time}) values(#{uid},#{name},#{createTime},#{password})")
     @Results(id="userResults")
     long insertUser(User u);
 

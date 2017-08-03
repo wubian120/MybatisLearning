@@ -1,0 +1,17 @@
+
+
+todo: basic running          done! 7-26
+todo: composition  mybatis   done  7-27
+todo: annotation config      done! 7-28
+todo: dynamic sql
+todo: output&input mapping ; brian blog
+todo: parameterMap & parameterType
+todo: resultType   & resultMap
+todo: cash mybatis
+todo: multi data source
+todo: unit test
+todo: log
+
+=====
+
+FIXME
