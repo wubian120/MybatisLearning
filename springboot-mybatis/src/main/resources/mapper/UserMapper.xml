@@ -16,6 +16,11 @@
         SELECT * FROM `user` WHERE uid=#{uid}
     </select>
 
+    <select id="getUserByName" parameterType="java.lang.String" resultMap="UserResultMap">
+        SELECT * FROM `user` WHERE `name`=#{name}
+    </select>
+
+
 
     <insert id="insertUser" parameterType="cn.brady.domain.User">
         INSERT INTO `user`(`uid`,`name`, `create_time`,`password`,`mobile`,`updated_time`)

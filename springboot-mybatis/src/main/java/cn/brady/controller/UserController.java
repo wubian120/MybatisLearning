@@ -19,8 +19,8 @@ public class UserController {
 
 
     @RequestMapping(value = "api/user",method = RequestMethod.GET)
-    public User getUserById(@RequestParam("uid") long id){
-        return userService.getUserById(id);
+    public User getUserById(@RequestParam("name") String name){
+        return userService.getUserByName(name);
     }
 
 

@@ -8,4 +8,6 @@ public interface UserService {
     long insertUser(User user);
 
     User getUserById(long id);
+
+    User getUserByName(String name);
 }

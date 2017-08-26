@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.brady.dao.local.CategoryKeywordMapper">
+
+
+    <resultMap id="KeywordMap" type="cn.brady.domain.Keyword">
+        <id column="k_id" jdbcType="BIGINT" property="id" />
+        <result column="keyword" jdbcType="VARCHAR"  property="keyword" />
+        <result column="type" jdbcType="VARCHAR"  property="type"/>
+        <result column="biz_date" jdbcType="INTEGER"  property="bizDate"/>
+        <result column="exclude" jdbcType="INTEGER"  property="exclude"/>
+
+        <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
+    </resultMap>
+
+    <resultMap id="CategoryMap" type="cn.brady.domain.Category">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="material_cost" jdbcType="DOUBLE" property="materialCost"/>
+        <collection property="keywords" resultMap="KeywordMap"/>
+
+
+    </resultMap>
+
+    <select id="getCategoryId" parameterType="long" resultMap="CategoryMap">
+        select c.*, k.id as k_id, k.keyword, k.type, k.biz_date, k.exclude
+        from category as c, keyword as k where c.id = k.category_id and c.id = #{id}
+    </select>
+
+
+    <update id="updateCategory" parameterType="cn.brady.domain.Category">
+
+        update category as c, keyword as k set
+        SET
+        c.material_cost = #{materialCost,jdbcType=DOUBLE}
+
+    </update>
+
+    <update id="updateKeywords" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+
+            update keyword
+            <set>
+            keyword = #{item.keyword},
+            type = #{item.type},
+            biz_date = #{item.bizDate},
+            exclude = #{item.exclude},
+            category_id = #{item.categoryId}
+            </set>
+            <where>id = #{item.id}</where>
+        </foreach>
+
+    </update>
+
+    <insert id="insertKeyword" parameterType="java.util.List">
+        insert into keyword(id, keyword, type, biz_date,exclude, category_id)
+        VALUES
+        <foreach collection="list" item="item" index="index"  separator="," >
+            (
+            #{item.id},
+            #{item.keyword},
+            #{item.type},
+            #{item.bizDate},
+            #{item.exclude},
+            #{item.categoryId})
+
+        </foreach>
+        on duplicate key update
+          id = values(id), keyword = values(keyword), type=values(type),
+          biz_date=values(biz_date),
+          exclude = values(exclude),category_id = values(category_id)
+    </insert>
+
+
+
+
+
+
+
+
+
+
+</mapper>

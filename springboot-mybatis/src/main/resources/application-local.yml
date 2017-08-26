@@ -1,5 +1,5 @@
 local:
-  url: jdbc:mysql://localhost:3306/test
+  url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
   username: root
   password: 123456
   driverClassName: com.mysql.jdbc.Driver
