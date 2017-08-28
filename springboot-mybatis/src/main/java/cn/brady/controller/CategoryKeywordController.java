@@ -6,6 +6,7 @@ import cn.brady.domain.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class CategoryKeywordController {
 
 //        String s = new String("");
         List<Keyword> keywords = new ArrayList<>();
+
         Keyword keyword1 = new Keyword();
         keyword1.setId(8);
         keyword1.setKeyword("油泼面");
@@ -36,9 +38,6 @@ public class CategoryKeywordController {
         keyword1.setBizDate(201708);
         keyword1.setCategoryId(5);
         keyword1.setExclude(0);
-
-
-
 
         Keyword keyword2 = new Keyword();
         keyword2.setId(11);
@@ -64,8 +63,6 @@ public class CategoryKeywordController {
             System.out.println(k.getKeyword());
         }
 
-//        mapper.insertKeyword(keywords);
-
         mapper.updateKeywords(keywords);
 
         System.out.println(" yeah works");
@@ -88,6 +85,12 @@ public class CategoryKeywordController {
         System.out.println(k.getKeyword());
 //        return k;
         return null;
+
+    }
+    @RequestMapping(value = "/aop",method = RequestMethod.GET)
+    public String aopAfterTest(@RequestParam String key){
+
+        return key;
 
     }
 
